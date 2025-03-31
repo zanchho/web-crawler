@@ -35,7 +35,6 @@ const crawl = async () => {
 		new Fields("color", "#variation_color_name"),
 	]
 
-	// const objectSelectors = { title: "", price: "", url: "", images: [], description: "", color: "" }
 	for (const field of amazonFields) {
 		console.log(field.selector)
 		try {
@@ -45,8 +44,8 @@ const crawl = async () => {
 		}
 	}
 
-	console.log(Fields.getAll(amazonFields))
-
+	const extractedData = Fields.getAll(amazonFields).reduce((acc, curr) => ({ ...acc, ...curr }), {})
+	console.log(JSON.stringify(extractedData, null, 2))
 	await browser.close()
 }
 crawl()
